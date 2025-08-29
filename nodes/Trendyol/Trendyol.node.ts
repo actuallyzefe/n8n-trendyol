@@ -22,7 +22,7 @@ export class Trendyol implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Trendyol',
 		name: 'trendyol',
-		icon: 'file:trendyol.svg',
+		icon: 'file:trendyol-logo.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',

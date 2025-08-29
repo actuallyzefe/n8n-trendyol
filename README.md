@@ -220,7 +220,7 @@ Found a bug or have a feature request? Please check existing issues first, then 
 │       │   ├── resources.ts
 │       │   ├── operations.ts
 │       │   └── fields.ts
-│       └── trendyol.svg           # Node icon
+│       └── trendyol-logo.svg           # Node icon
 ├── dist/                       # Compiled output
 ├── gulpfile.js                 # Build configuration
 ├── package.json               # Project configuration

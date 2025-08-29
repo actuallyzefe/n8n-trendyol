@@ -11,6 +11,7 @@ export class TrendyolApi implements ICredentialType {
 	name = 'trendyolApi';
 	displayName = 'Trendyol API';
 	documentationUrl = 'https://developers.trendyol.com/docs/authorization';
+	icon = 'file:trendyol-logo.svg' as const;
 	properties: INodeProperties[] = [
 		{
 			displayName: 'Supplier ID',
@@ -58,22 +59,23 @@ export class TrendyolApi implements ICredentialType {
 		},
 	];
 
-
 	async authenticate(
 		credentials: ICredentialDataDecryptedObject,
 		requestOptions: IHttpRequestOptions,
 	): Promise<IHttpRequestOptions> {
 		requestOptions.headers = {
 			...requestOptions.headers,
-			Authorization: `Basic ${Buffer.from(`${credentials.apiKey}:${credentials.apiSecret}`).toString(BINARY_ENCODING)}`,
-		};      
+			Authorization: `Basic ${Buffer.from(
+				`${credentials.apiKey}:${credentials.apiSecret}`,
+			).toString(BINARY_ENCODING)}`,
+		};
 		return requestOptions;
 	}
 
-
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: '={{$credentials.environment === "sandbox" ? "https://stageapigw.trendyol.com" : "https://apigw.trendyol.com"}}',
+			baseURL:
+				'={{$credentials.environment === "sandbox" ? "https://stageapigw.trendyol.com" : "https://apigw.trendyol.com"}}',
 			url: '/integration/product/brands',
 			method: 'GET',
 		},
