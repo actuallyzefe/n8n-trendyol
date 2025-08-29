@@ -8,14 +8,14 @@
 		"ecommerce"
 	],
 	"license": "MIT",
-	"homepage": "https://github.com/actuallyzefe/n8n-trendyol.git",
+	"homepage": "https://github.com/actuallyzefe/n8n-trendyol",
 	"author": {
 		"name": "Efe Karakanlı",
 		"email": "zefek10@gmail.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/actuallyzefe/n8n-trendyol.git"
+		"url": "git+https://github.com/actuallyzefe/n8n-trendyol"
 	},
 	"engines": {
 		"node": ">=22.16"

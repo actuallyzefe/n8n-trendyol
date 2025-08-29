@@ -2,11 +2,11 @@
 
 ![npm](https://img.shields.io/npm/v/n8n-nodes-trendyol?style=flat-square&logo=npm&logoColor=white&color=orange)
 ![npm](https://img.shields.io/npm/dt/n8n-nodes-trendyol?style=flat-square&logo=npm&logoColor=white&color=blue)
-![GitHub](https://img.shields.io/github/license/efekarakanli/n8n-nodes-trendyol?style=flat-square&logo=github&logoColor=white&color=green)
-![GitHub last commit](https://img.shields.io/github/last-commit/efekarakanli/n8n-nodes-trendyol?style=flat-square&logo=github&logoColor=white&color=purple)
+![GitHub](https://img.shields.io/github/license/actuallyzefe/n8n-trendyol?style=flat-square&logo=github&logoColor=white&color=green)
+![GitHub last commit](https://img.shields.io/github/last-commit/actuallyzefe/n8n-trendyol?style=flat-square&logo=github&logoColor=white&color=purple)
 
 <div align="center">
-  <img src="./nodes/Trendyol/trendyol-logo.svg" alt="Trendyol Logo" width="200"/>
+  <img src="./trendyol-n8n-logo.svg" alt="Trendyol x n8n Integration" width="400"/>
   
   **A powerful n8n community node for Trendyol Marketplace API integration**
   
@@ -52,7 +52,7 @@ This Trendyol node provides comprehensive integration with the Trendyol Marketpl
 
 ### **Products**
 
-- `Get All` - Retrieve all products with comprehensive filtering options:
+- `Get Many` - Retrieve all products with comprehensive filtering options:
   - **Basic Filters**: Approved status, archived status, pagination
   - **Brand & Category**: Filter by specific brand IDs (comma-separated array)
   - **Product Identification**: Barcode and stock code filtering
@@ -62,16 +62,16 @@ This Trendyol node provides comprehensive integration with the Trendyol Marketpl
 
 ### **Orders**
 
-- `Get All` - Retrieve order information with filtering (date ranges, pagination)
+- `Get Many` - Retrieve order information with filtering (date ranges, pagination)
 
 ### **Brands**
 
-- `Get All` - List all available brands with pagination
+- `Get Many` - List all available brands with pagination
 - `Get By Name` - Search for brands by name
 
 ### **Categories**
 
-- `Get All` - Retrieve all product categories
+- `Get Many` - Retrieve all product categories
 
 ## Credentials
 
