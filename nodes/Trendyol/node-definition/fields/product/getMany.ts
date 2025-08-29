@@ -1,21 +1,21 @@
 import type { INodeProperties } from 'n8n-workflow';
 import { paginationFields } from '../common';
 
-export const productGetAllFields: INodeProperties[] = [
+export const productGetManyFields: INodeProperties[] = [
 	...paginationFields,
 	{
 		displayName: 'Approved',
 		name: 'approved',
 		type: 'boolean',
 		default: true,
-		description: 'Filter by approval status',
+		description: 'Whether to filter by approval status',
 	},
 	{
 		displayName: 'Archived',
 		name: 'archived',
 		type: 'boolean',
 		default: false,
-		description: 'Include archived products',
+		description: 'Whether to include archived products',
 	},
 	{
 		displayName: 'Brand IDs',
@@ -88,21 +88,21 @@ export const productGetAllFields: INodeProperties[] = [
 		displayName: 'On Sale',
 		name: 'onSale',
 		type: 'boolean',
-		default: '',
-		description: 'To list products on sale, send only onSale=true',
+		default: false,
+		description: 'Whether to list products on sale',
 	},
 	{
 		displayName: 'Rejected',
 		name: 'rejected',
 		type: 'boolean',
-		default: '',
-		description: 'To list rejected products, send rejected=true or false',
+		default: false,
+		description: 'Whether to list rejected products',
 	},
 	{
 		displayName: 'Blacklisted',
 		name: 'blacklisted',
 		type: 'boolean',
-		default: '',
-		description: 'To list blacklisted products, send blacklisted=true or false',
+		default: false,
+		description: 'Whether to list blacklisted products',
 	},
 ];

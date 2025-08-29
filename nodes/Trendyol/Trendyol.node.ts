@@ -8,11 +8,11 @@ import { NodeConnectionType } from 'n8n-workflow';
 
 import { nodeProperties } from './node-definition';
 import {
-	getAllProducts,
-	getAllOrders,
-	getAllBrands,
+	getManyProducts,
+	getManyOrders,
+	getManyBrands,
 	getBrandByName,
-	getAllCategories,
+	getManyCategories,
 } from './resources';
 import type { TrendyolResource, TrendyolOperation } from './types';
 
@@ -59,22 +59,22 @@ export class Trendyol implements INodeType {
 				let responseData;
 
 				if (resource === 'product') {
-					if (operation === 'getAll') {
-						responseData = await getAllProducts.call(this, i);
+					if (operation === 'getMany') {
+						responseData = await getManyProducts.call(this, i);
 					}
 				} else if (resource === 'order') {
-					if (operation === 'getAll') {
-						responseData = await getAllOrders.call(this, i);
+					if (operation === 'getMany') {
+						responseData = await getManyOrders.call(this, i);
 					}
 				} else if (resource === 'brand') {
-					if (operation === 'getAll') {
-						responseData = await getAllBrands.call(this, i);
+					if (operation === 'getMany') {
+						responseData = await getManyBrands.call(this, i);
 					} else if (operation === 'getByName') {
 						responseData = await getBrandByName.call(this, i);
 					}
 				} else if (resource === 'category') {
-					if (operation === 'getAll') {
-						responseData = await getAllCategories.call(this, i);
+					if (operation === 'getMany') {
+						responseData = await getManyCategories.call(this, i);
 					}
 				}
 

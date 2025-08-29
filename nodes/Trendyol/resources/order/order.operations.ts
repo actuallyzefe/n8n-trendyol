@@ -7,7 +7,7 @@ import type { OrderFilters } from '../../types';
 /**
  * Get all orders
  */
-export async function getAllOrders(this: IExecuteFunctions, index: number): Promise<any> {
+export async function getManyOrders(this: IExecuteFunctions, index: number): Promise<any> {
 	const credentials = await getTrendyolCredentials.call(this);
 	const additionalFields = this.getNodeParameter('additionalFields', index) as OrderFilters;
 

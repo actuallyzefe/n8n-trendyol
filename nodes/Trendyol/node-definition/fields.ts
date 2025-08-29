@@ -1,8 +1,8 @@
 import type { INodeProperties } from 'n8n-workflow';
-import { productGetAllFields } from './fields/product';
-import { orderGetAllFields } from './fields/order';
-import { brandNameField, brandGetAllFields } from './fields/brand';
-import { categoryGetAllFields } from './fields/category';
+import { productGetManyFields } from './fields/product';
+import { orderGetManyFields } from './fields/order';
+import { brandNameField, brandGetManyFields } from './fields/brand';
+import { categoryGetManyFields } from './fields/category';
 
 /**
  * Export individual required field components for specific operations
@@ -34,10 +34,10 @@ const addResourceDisplayOptions = (
 	}));
 
 /**
- * Main additional fields collection for 'getAll' operations
+ * Main additional fields collection for 'getMany' operations
  *
  * This creates a collection of optional fields that users can configure
- * when performing 'getAll' operations. Each resource (product, order, brand, category)
+ * when performing 'getMany' operations. Each resource (product, order, brand, category)
  * has its own set of filters and parameters that are dynamically shown
  * based on the selected resource.
  *
@@ -55,20 +55,20 @@ export const additionalFieldsCollection: INodeProperties = {
 	default: {},
 	displayOptions: {
 		show: {
-			operation: ['getAll'], // Currently only show for 'getAll' operations
+			operation: ['getMany'], // Currently only show for 'getMany' operations
 		},
 	},
 	options: [
-		// Product-specific fields (filters for product getAll operation)
-		...addResourceDisplayOptions(productGetAllFields, 'product'),
+		// Product-specific fields (filters for product getMany operation)
+		...addResourceDisplayOptions(productGetManyFields, 'product'),
 
-		// Order-specific fields (filters for order getAll operation)
-		...addResourceDisplayOptions(orderGetAllFields, 'order'),
+		// Order-specific fields (filters for order getMany operation)
+		...addResourceDisplayOptions(orderGetManyFields, 'order'),
 
-		// Brand-specific fields (filters for brand getAll operation)
-		...addResourceDisplayOptions(brandGetAllFields, 'brand'),
+		// Brand-specific fields (filters for brand getMany operation)
+		...addResourceDisplayOptions(brandGetManyFields, 'brand'),
 
-		// Category-specific fields (filters for category getAll operation)
-		...addResourceDisplayOptions(categoryGetAllFields, 'category'),
+		// Category-specific fields (filters for category getMany operation)
+		...addResourceDisplayOptions(categoryGetManyFields, 'category'),
 	],
 };

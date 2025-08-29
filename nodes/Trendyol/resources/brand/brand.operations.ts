@@ -7,7 +7,7 @@ import type { PaginationParams } from '../../types';
 /**
  * Get all brands
  */
-export async function getAllBrands(this: IExecuteFunctions, index: number): Promise<any> {
+export async function getManyBrands(this: IExecuteFunctions, index: number): Promise<any> {
 	const additionalFields = this.getNodeParameter('additionalFields', index) as PaginationParams;
 
 	const qs = buildPaginationParams(additionalFields);

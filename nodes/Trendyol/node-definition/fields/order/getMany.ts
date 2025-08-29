@@ -1,7 +1,7 @@
 import type { INodeProperties } from 'n8n-workflow';
 import { paginationFields } from '../common';
 
-export const orderGetAllFields: INodeProperties[] = [
+export const orderGetManyFields: INodeProperties[] = [
 	...paginationFields,
 	{
 		displayName: 'Start Date',
@@ -21,44 +21,44 @@ export const orderGetAllFields: INodeProperties[] = [
 		displayName: 'Status',
 		name: 'status',
 		type: 'options',
-		default: '',
+		default: 'AtCollectionPoint',
 		description: 'Filter orders by status',
 		options: [
 			{
-				name: 'Created',
-				value: 'Created',
-			},
-			{
-				name: 'Picking',
-				value: 'Picking',
-			},
-			{
-				name: 'Invoiced',
-				value: 'Invoiced',
-			},
-			{
-				name: 'Shipped',
-				value: 'Shipped',
+				name: 'At Collection Point',
+				value: 'AtCollectionPoint',
 			},
 			{
 				name: 'Cancelled',
 				value: 'Cancelled',
 			},
 			{
+				name: 'Created',
+				value: 'Created',
+			},
+			{
 				name: 'Delivered',
 				value: 'Delivered',
 			},
 			{
-				name: 'UnDelivered',
-				value: 'UnDelivered',
+				name: 'Invoiced',
+				value: 'Invoiced',
+			},
+			{
+				name: 'Picking',
+				value: 'Picking',
 			},
 			{
 				name: 'Returned',
 				value: 'Returned',
 			},
 			{
-				name: 'At Collection Point',
-				value: 'AtCollectionPoint',
+				name: 'Shipped',
+				value: 'Shipped',
+			},
+			{
+				name: 'UnDelivered',
+				value: 'UnDelivered',
 			},
 			{
 				name: 'UnPacked',
@@ -95,7 +95,7 @@ export const orderGetAllFields: INodeProperties[] = [
 		displayName: 'Order By Field',
 		name: 'orderByField',
 		type: 'options',
-		default: '',
+		default: 'PackageLastModifiedDate',
 		description: 'Field to sort results by',
 		options: [
 			{

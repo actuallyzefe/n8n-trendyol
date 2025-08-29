@@ -5,6 +5,6 @@ import { CATEGORY_ENDPOINTS } from '../../endpoints';
 /**
  * Get all categories
  */
-export async function getAllCategories(this: IExecuteFunctions, index: number): Promise<any> {
+export async function getManyCategories(this: IExecuteFunctions, index: number): Promise<any> {
 	return await trendyolApiRequest.call(this, 'GET', CATEGORY_ENDPOINTS.GET_ALL);
 }

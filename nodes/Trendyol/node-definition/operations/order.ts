@@ -12,11 +12,11 @@ export const orderOperationsField: INodeProperties = {
 	},
 	options: [
 		{
-			name: 'Get All',
-			value: 'getAll',
-			description: 'Get all orders',
-			action: 'Get all orders',
+			name: 'Get Many',
+			value: 'getMany',
+			description: 'Get many orders',
+			action: 'Get many orders',
 		},
 	],
-	default: 'getAll',
+	default: 'getMany',
 };

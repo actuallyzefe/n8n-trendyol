@@ -94,10 +94,10 @@ export interface OrderFilters extends PaginationParams {
 
 export type TrendyolResource = 'product' | 'order' | 'brand' | 'category';
 
-export type ProductOperation = 'getAll' | 'get';
-export type OrderOperation = 'getAll' | 'get';
-export type BrandOperation = 'getAll' | 'getByName';
-export type CategoryOperation = 'getAll';
+export type ProductOperation = 'getMany' | 'get';
+export type OrderOperation = 'getMany' | 'get';
+export type BrandOperation = 'getMany' | 'getByName';
+export type CategoryOperation = 'getMany';
 
 export type TrendyolOperation =
 	| ProductOperation

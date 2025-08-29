@@ -12,10 +12,10 @@ export const brandOperationsField: INodeProperties = {
 	},
 	options: [
 		{
-			name: 'Get All',
-			value: 'getAll',
-			description: 'Get all brands',
-			action: 'Get all brands',
+			name: 'Get Many',
+			value: 'getMany',
+			description: 'Get many brands',
+			action: 'Get many brands',
 		},
 		{
 			name: 'Get By Name',
@@ -24,5 +24,5 @@ export const brandOperationsField: INodeProperties = {
 			action: 'Get brand by name',
 		},
 	],
-	default: 'getAll',
+	default: 'getMany',
 };

@@ -1,23 +1,24 @@
 {
 	"name": "n8n-nodes-trendyol",
 	"version": "0.1.0",
-	"description": "",
+	"description": "Trendyol node for n8n",
 	"keywords": [
 		"n8n-community-node-package",
-		"trendyol"
+		"trendyol",
+		"ecommerce"
 	],
 	"license": "MIT",
-	"homepage": "",
+	"homepage": "https://github.com/actuallyzefe/n8n-trendyol.git",
 	"author": {
-		"name": "",
-		"email": ""
+		"name": "Efe Karakanlı",
+		"email": "zefek10@gmail.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/<...>/n8n-nodes-<...>.git"
+		"url": "git+https://github.com/actuallyzefe/n8n-trendyol.git"
 	},
 	"engines": {
-		"node": ">=20.15"
+		"node": ">=22.16"
 	},
 	"main": "index.js",
 	"scripts": {
@@ -34,13 +35,9 @@
 	"n8n": {
 		"n8nNodesApiVersion": 1,
 		"credentials": [
-			"dist/credentials/ExampleCredentialsApi.credentials.js",
-			"dist/credentials/HttpBinApi.credentials.js",
 			"dist/credentials/TrendyolApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/ExampleNode/ExampleNode.node.js",
-			"dist/nodes/HttpBin/HttpBin.node.js",
 			"dist/nodes/Trendyol/Trendyol.node.js"
 		]
 	},

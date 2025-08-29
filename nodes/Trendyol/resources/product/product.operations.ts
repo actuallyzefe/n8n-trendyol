@@ -7,7 +7,7 @@ import type { ProductFilters } from '../../types';
 /**
  * Get all products
  */
-export async function getAllProducts(this: IExecuteFunctions, index: number): Promise<any> {
+export async function getManyProducts(this: IExecuteFunctions, index: number): Promise<any> {
 	const credentials = await getTrendyolCredentials.call(this);
 	const additionalFields = this.getNodeParameter('additionalFields', index) as ProductFilters;
 
