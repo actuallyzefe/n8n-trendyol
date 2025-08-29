@@ -9,9 +9,7 @@ import { NodeConnectionType } from 'n8n-workflow';
 import { nodeProperties } from './node-definition';
 import {
 	getAllProducts,
-	getProduct,
 	getAllOrders,
-	getOrder,
 	getAllBrands,
 	getBrandByName,
 	getAllCategories,
@@ -63,14 +61,10 @@ export class Trendyol implements INodeType {
 				if (resource === 'product') {
 					if (operation === 'getAll') {
 						responseData = await getAllProducts.call(this, i);
-					} else if (operation === 'get') {
-						responseData = await getProduct.call(this, i);
 					}
 				} else if (resource === 'order') {
 					if (operation === 'getAll') {
 						responseData = await getAllOrders.call(this, i);
-					} else if (operation === 'get') {
-						responseData = await getOrder.call(this, i);
 					}
 				} else if (resource === 'brand') {
 					if (operation === 'getAll') {

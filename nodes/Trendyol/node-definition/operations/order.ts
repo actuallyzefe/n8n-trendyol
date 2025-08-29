@@ -17,12 +17,6 @@ export const orderOperationsField: INodeProperties = {
 			description: 'Get all orders',
 			action: 'Get all orders',
 		},
-		{
-			name: 'Get',
-			value: 'get',
-			description: 'Get an order by ID',
-			action: 'Get an order',
-		},
 	],
 	default: 'getAll',
 };

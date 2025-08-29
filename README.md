@@ -59,12 +59,10 @@ This Trendyol node provides comprehensive integration with the Trendyol Marketpl
   - **Date Range**: Filter by creation or modification date (timestamp support)
   - **Status Filters**: On sale, rejected, blacklisted products
   - **Supplier Filters**: Filter by supplier ID and product main ID
-- `Get` - Retrieve specific product details by ID
 
 ### **Orders**
 
 - `Get All` - Retrieve order information with filtering (date ranges, pagination)
-- `Get` - Fetch specific order details by order ID
 
 ### **Brands**
 

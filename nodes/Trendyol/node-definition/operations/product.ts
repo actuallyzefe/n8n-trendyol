@@ -17,12 +17,6 @@ export const productOperationsField: INodeProperties = {
 			description: 'Get all products',
 			action: 'Get all products',
 		},
-		{
-			name: 'Get',
-			value: 'get',
-			description: 'Get a product by ID',
-			action: 'Get a product',
-		},
 	],
 	default: 'getAll',
 };

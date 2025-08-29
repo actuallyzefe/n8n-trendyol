@@ -1,6 +1,6 @@
 import type { IExecuteFunctions } from 'n8n-workflow';
 import { trendyolApiRequest, getTrendyolCredentials } from '../../GenericFunctions';
-import { buildPaginationParams, validateRequiredParameter } from '../../utils';
+import { buildPaginationParams } from '../../utils';
 import { buildProductEndpoint } from '../../endpoints';
 import type { ProductFilters } from '../../types';
 
@@ -66,17 +66,4 @@ export async function getAllProducts(this: IExecuteFunctions, index: number): Pr
 
 	const endpoint = buildProductEndpoint(credentials.supplierId);
 	return await trendyolApiRequest.call(this, 'GET', endpoint, undefined, qs);
-}
-
-/**
- * Get a single product by ID
- */
-export async function getProduct(this: IExecuteFunctions, index: number): Promise<any> {
-	const credentials = await getTrendyolCredentials.call(this);
-	const productId = this.getNodeParameter('productId', index) as string;
-
-	validateRequiredParameter(productId, 'productId');
-
-	const endpoint = buildProductEndpoint(credentials.supplierId, productId);
-	return await trendyolApiRequest.call(this, 'GET', endpoint);
 }
