@@ -1,33 +1,50 @@
 # n8n-nodes-trendyol
 
-![Trendyol Logo](https://developers.trendyol.com/assets/img/trendyol_logo.svg)
+![npm](https://img.shields.io/npm/v/n8n-nodes-trendyol?style=flat-square&logo=npm&logoColor=white&color=orange)
+![npm](https://img.shields.io/npm/dt/n8n-nodes-trendyol?style=flat-square&logo=npm&logoColor=white&color=blue)
+![GitHub](https://img.shields.io/github/license/efekarakanli/n8n-nodes-trendyol?style=flat-square&logo=github&logoColor=white&color=green)
+![GitHub last commit](https://img.shields.io/github/last-commit/efekarakanli/n8n-nodes-trendyol?style=flat-square&logo=github&logoColor=white&color=purple)
 
+<div align="center">
+  <img src="./nodes/Trendyol/trendyol-logo.svg" alt="Trendyol Logo" width="200"/>
+  
+  **A powerful n8n community node for Trendyol Marketplace API integration**
+  
+  *Seamlessly automate your Trendyol e-commerce workflows with n8n*
+</div>
+
+---
+
+**What is this?**
 A custom n8n node for integrating with Trendyol Marketplace API. This node enables seamless automation workflows between Trendyol and other services through n8n's visual workflow builder.
 
-[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
+**What is n8n?**
+[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform that lets you connect different services and automate tasks visually.
 
-[Installation](#installation)  
-[Features](#features)  
-[Credentials](#credentials)  
-[Compatibility](#compatibility)  
-[Usage](#usage)  
-[Contributing](#contributing)  
-[Development Setup](#development-setup)  
-[Resources](#resources)
+## Table of Contents
+
+- [Installation](#installation)
+- [Features](#features)
+- [Credentials](#credentials)
+- [Compatibility](#compatibility)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [Development Setup](#development-setup)
+- [Resources](#resources)
 
 ## Installation
 
 Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
 
-### Community Installation
+### Quick Install via n8n Community Nodes
 
 1. Go to **Settings > Community Nodes**
 2. Select **Install**
 3. Enter `n8n-nodes-trendyol`
-4. Agree to the risks of using community nodes: select **I understand the risks of installing unverified code from a public source**
+4. Agree to the risks: **I understand the risks of installing unverified code from a public source**
 5. Select **Install**
 
-After installing the node, you can use it like any other node in n8n.
+> **That's it!** After installation, the Trendyol node will be available in your n8n palette.
 
 ## Features
 
