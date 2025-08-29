@@ -1,12 +1,21 @@
 # n8n-nodes-trendyol
 
-![npm](https://img.shields.io/npm/v/n8n-nodes-trendyol?style=flat-square&logo=npm&logoColor=white&color=orange)
-![npm](https://img.shields.io/npm/dt/n8n-nodes-trendyol?style=flat-square&logo=npm&logoColor=white&color=blue)
-![GitHub](https://img.shields.io/github/license/actuallyzefe/n8n-trendyol?style=flat-square&logo=github&logoColor=white&color=green)
-![GitHub last commit](https://img.shields.io/github/last-commit/actuallyzefe/n8n-trendyol?style=flat-square&logo=github&logoColor=white&color=purple)
+<div align="center">
+  <img src="https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png" alt="n8n" width="120" height="120">
+  <span style="font-size: 50px; margin: 0 20px;">+</span>
+  <img src="./nodes/Trendyol/trendyol-logo.svg" alt="Trendyol" width="120" height="120">
+</div>
 
 <div align="center">
-  <img src="./trendyol-n8n-logo.svg" alt="Trendyol x n8n Integration" width="400"/>
+  
+![n8n.io - Trendyol](https://img.shields.io/badge/n8n.io-Trendyol-orange.svg)
+![Version](https://img.shields.io/npm/v/n8n-nodes-trendyol.svg)
+![Downloads](https://img.shields.io/npm/dt/n8n-nodes-trendyol.svg)
+![License](https://img.shields.io/npm/l/n8n-nodes-trendyol.svg)
+
+</div>
+
+<div align="center">
   
   **A powerful n8n community node for Trendyol Marketplace API integration**
   
