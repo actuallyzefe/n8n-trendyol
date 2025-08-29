@@ -8,14 +8,14 @@ import { NodeConnectionType } from 'n8n-workflow';
 
 import { nodeProperties } from './node-definition';
 import {
-	executeProductGetAll,
-	executeProductGet,
-	executeOrderGetAll,
-	executeOrderGet,
-	executeBrandGetAll,
-	executeBrandGetByName,
-	executeCategoryGetAll,
-} from './operations';
+	getAllProducts,
+	getProduct,
+	getAllOrders,
+	getOrder,
+	getAllBrands,
+	getBrandByName,
+	getAllCategories,
+} from './resources';
 import type { TrendyolResource, TrendyolOperation } from './types';
 
 export class Trendyol implements INodeType {
@@ -40,7 +40,7 @@ export class Trendyol implements INodeType {
 		],
 		requestDefaults: {
 			baseURL:
-				'={{$credentials.environment === "sandbox" ? "https://stageapi.trendyol.com" : "https://api.trendyol.com"}}',
+				'={{$credentials.environment === "sandbox" ? "https://stageapigw.trendyol.com" : "https://apigw.trendyol.com"}}',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
@@ -62,25 +62,25 @@ export class Trendyol implements INodeType {
 
 				if (resource === 'product') {
 					if (operation === 'getAll') {
-						responseData = await executeProductGetAll.call(this, i);
+						responseData = await getAllProducts.call(this, i);
 					} else if (operation === 'get') {
-						responseData = await executeProductGet.call(this, i);
+						responseData = await getProduct.call(this, i);
 					}
 				} else if (resource === 'order') {
 					if (operation === 'getAll') {
-						responseData = await executeOrderGetAll.call(this, i);
+						responseData = await getAllOrders.call(this, i);
 					} else if (operation === 'get') {
-						responseData = await executeOrderGet.call(this, i);
+						responseData = await getOrder.call(this, i);
 					}
 				} else if (resource === 'brand') {
 					if (operation === 'getAll') {
-						responseData = await executeBrandGetAll.call(this, i);
+						responseData = await getAllBrands.call(this, i);
 					} else if (operation === 'getByName') {
-						responseData = await executeBrandGetByName.call(this, i);
+						responseData = await getBrandByName.call(this, i);
 					}
 				} else if (resource === 'category') {
 					if (operation === 'getAll') {
-						responseData = await executeCategoryGetAll.call(this, i);
+						responseData = await getAllCategories.call(this, i);
 					}
 				}
 

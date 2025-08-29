@@ -6,12 +6,7 @@ import {
 	brandOperationsField,
 	categoryOperationsField,
 } from './operations';
-import {
-	productIdField,
-	orderIdField,
-	brandNameField,
-	additionalFieldsCollection,
-} from './fields';
+import { brandNameField, additionalFieldsCollection } from './fields';
 
 export const nodeProperties: INodeProperties[] = [
 	resourceField,
@@ -19,8 +14,6 @@ export const nodeProperties: INodeProperties[] = [
 	orderOperationsField,
 	brandOperationsField,
 	categoryOperationsField,
-	productIdField,
-	orderIdField,
 	brandNameField,
 	additionalFieldsCollection,
 ];

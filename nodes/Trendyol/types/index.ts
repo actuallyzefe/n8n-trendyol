@@ -84,6 +84,12 @@ export interface ProductFilters extends PaginationParams {
 export interface OrderFilters extends PaginationParams {
 	startDate?: string;
 	endDate?: string;
+	status?: string;
+	orderByField?: string;
+	orderByDirection?: string;
+	orderNumber?: string;
+	supplierId?: number;
+	shipmentPackageIds?: number;
 }
 
 export type TrendyolResource = 'product' | 'order' | 'brand' | 'category';
@@ -93,4 +99,8 @@ export type OrderOperation = 'getAll' | 'get';
 export type BrandOperation = 'getAll' | 'getByName';
 export type CategoryOperation = 'getAll';
 
-export type TrendyolOperation = ProductOperation | OrderOperation | BrandOperation | CategoryOperation;
+export type TrendyolOperation =
+	| ProductOperation
+	| OrderOperation
+	| BrandOperation
+	| CategoryOperation;

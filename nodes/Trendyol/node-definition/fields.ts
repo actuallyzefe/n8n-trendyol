@@ -1,50 +1,52 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { productGetAllFields } from './fields/product';
+import { orderGetAllFields } from './fields/order';
+import { brandNameField, brandGetAllFields } from './fields/brand';
+import { categoryGetAllFields } from './fields/category';
 
-export const productIdField: INodeProperties = {
-	displayName: 'Product ID',
-	name: 'productId',
-	type: 'string',
-	required: true,
-	displayOptions: {
-		show: {
-			resource: ['product'],
-			operation: ['get'],
+/**
+ * Export individual required field components for specific operations
+ * These are used for operations that need a specific ID or name parameter
+ */
+export { brandNameField };
+
+/**
+ * Helper function to add resource-specific display options to field arrays
+ *
+ * This function takes an array of field definitions and adds display conditions
+ * so they only show when a specific resource is selected in the UI
+ *
+ * @param fields - Array of field definitions to modify
+ * @param resource - The resource name that should trigger displaying these fields
+ * @returns Modified array of fields with resource-specific display conditions
+ */
+const addResourceDisplayOptions = (
+	fields: INodeProperties[],
+	resource: string,
+): INodeProperties[] =>
+	fields.map((field) => ({
+		...field,
+		displayOptions: {
+			show: {
+				'/resource': [resource], // Only show when this specific resource is selected
+			},
 		},
-	},
-	default: '',
-	description: 'The ID of the product',
-};
+	}));
 
-export const orderIdField: INodeProperties = {
-	displayName: 'Order ID',
-	name: 'orderId',
-	type: 'string',
-	required: true,
-	displayOptions: {
-		show: {
-			resource: ['order'],
-			operation: ['get'],
-		},
-	},
-	default: '',
-	description: 'The ID of the order',
-};
-
-export const brandNameField: INodeProperties = {
-	displayName: 'Brand Name',
-	name: 'brandName',
-	type: 'string',
-	required: true,
-	displayOptions: {
-		show: {
-			resource: ['brand'],
-			operation: ['getByName'],
-		},
-	},
-	default: '',
-	description: 'The name of the brand',
-};
-
+/**
+ * Main additional fields collection for 'getAll' operations
+ *
+ * This creates a collection of optional fields that users can configure
+ * when performing 'getAll' operations. Each resource (product, order, brand, category)
+ * has its own set of filters and parameters that are dynamically shown
+ * based on the selected resource.
+ *
+ * The collection includes:
+ * - Product filters: pagination, approval status, dates, brand IDs, etc.
+ * - Order filters: pagination, dates, status, order number, supplier ID, etc.
+ * - Brand filters: pagination only
+ * - Category filters: pagination only
+ */
 export const additionalFieldsCollection: INodeProperties = {
 	displayName: 'Additional Fields',
 	name: 'additionalFields',
@@ -53,213 +55,20 @@ export const additionalFieldsCollection: INodeProperties = {
 	default: {},
 	displayOptions: {
 		show: {
-			operation: ['getAll'],
+			operation: ['getAll'], // Currently only show for 'getAll' operations
 		},
 	},
 	options: [
-		{
-			displayName: 'Page',
-			name: 'page',
-			type: 'number',
-			default: 0,
-			description: 'Page number for pagination (0-based)',
-		},
-		{
-			displayName: 'Size',
-			name: 'size',
-			type: 'number',
-			default: 50,
-			description: 'Number of items per page',
-		},
-		{
-			displayName: 'Approved',
-			name: 'approved',
-			type: 'boolean',
-			default: true,
-			description: 'Filter by approval status',
-			displayOptions: {
-				show: {
-					'/resource': ['product'],
-				},
-			},
-		},
-		{
-			displayName: 'Archived',
-			name: 'archived',
-			type: 'boolean',
-			default: false,
-			description: 'Include archived products',
-			displayOptions: {
-				show: {
-					'/resource': ['product'],
-				},
-			},
-		},
-		{
-			displayName: 'Brand IDs',
-			name: 'brandIds',
-			type: 'string',
-			default: '',
-			description: 'Used to list products with the specified brand ID (comma-separated array)',
-			displayOptions: {
-				show: {
-					'/resource': ['product'],
-				},
-			},
-		},
-		{
-			displayName: 'Barcode',
-			name: 'barcode',
-			type: 'string',
-			default: '',
-			description: 'Used to query a specific barcode',
-			displayOptions: {
-				show: {
-					'/resource': ['product'],
-				},
-			},
-		},
-		{
-			displayName: 'Stock Code',
-			name: 'stockCode',
-			type: 'string',
-			default: '',
-			description: 'The stock code information of the relevant supplier',
-			displayOptions: {
-				show: {
-					'/resource': ['product'],
-				},
-			},
-		},
-		{
-			displayName: 'Start Date',
-			name: 'startDate',
-			type: 'number',
-			default: '',
-			description: 'Gets products after a specific date. Must be sent as timestamp.',
-			displayOptions: {
-				show: {
-					'/resource': ['product'],
-				},
-			},
-		},
-		{
-			displayName: 'End Date',
-			name: 'endDate',
-			type: 'number',
-			default: '',
-			description: 'Gets products before a specific date. Must be sent as timestamp.',
-			displayOptions: {
-				show: {
-					'/resource': ['product'],
-				},
-			},
-		},
-		{
-			displayName: 'Date Query Type',
-			name: 'dateQueryType',
-			type: 'options',
-			default: 'CREATED_DATE',
-			description: 'The date on which the date filter will work can be sent as CREATED_DATE or LAST_MODIFIED_DATE',
-			options: [
-				{
-					name: 'Created Date',
-					value: 'CREATED_DATE',
-				},
-				{
-					name: 'Last Modified Date',
-					value: 'LAST_MODIFIED_DATE',
-				},
-			],
-			displayOptions: {
-				show: {
-					'/resource': ['product'],
-				},
-			},
-		},
-		{
-			displayName: 'Supplier ID',
-			name: 'supplierId',
-			type: 'number',
-			default: '',
-			description: 'The ID information of the relevant supplier',
-			displayOptions: {
-				show: {
-					'/resource': ['product'],
-				},
-			},
-		},
-		{
-			displayName: 'Product Main ID',
-			name: 'productMainId',
-			type: 'string',
-			default: '',
-			description: 'The productMainId information of the relevant supplier',
-			displayOptions: {
-				show: {
-					'/resource': ['product'],
-				},
-			},
-		},
-		{
-			displayName: 'On Sale',
-			name: 'onSale',
-			type: 'boolean',
-			default: '',
-			description: 'To list products on sale, send only onSale=true',
-			displayOptions: {
-				show: {
-					'/resource': ['product'],
-				},
-			},
-		},
-		{
-			displayName: 'Rejected',
-			name: 'rejected',
-			type: 'boolean',
-			default: '',
-			description: 'To list rejected products, send rejected=true or false',
-			displayOptions: {
-				show: {
-					'/resource': ['product'],
-				},
-			},
-		},
-		{
-			displayName: 'Blacklisted',
-			name: 'blacklisted',
-			type: 'boolean',
-			default: '',
-			description: 'To list blacklisted products, send blacklisted=true or false',
-			displayOptions: {
-				show: {
-					'/resource': ['product'],
-				},
-			},
-		},
-		{
-			displayName: 'Start Date',
-			name: 'startDate',
-			type: 'dateTime',
-			default: '',
-			description: 'Start date for filtering orders',
-			displayOptions: {
-				show: {
-					'/resource': ['order'],
-				},
-			},
-		},
-		{
-			displayName: 'End Date',
-			name: 'endDate',
-			type: 'dateTime',
-			default: '',
-			description: 'End date for filtering orders',
-			displayOptions: {
-				show: {
-					'/resource': ['order'],
-				},
-			},
-		},
+		// Product-specific fields (filters for product getAll operation)
+		...addResourceDisplayOptions(productGetAllFields, 'product'),
+
+		// Order-specific fields (filters for order getAll operation)
+		...addResourceDisplayOptions(orderGetAllFields, 'order'),
+
+		// Brand-specific fields (filters for brand getAll operation)
+		...addResourceDisplayOptions(brandGetAllFields, 'brand'),
+
+		// Category-specific fields (filters for category getAll operation)
+		...addResourceDisplayOptions(categoryGetAllFields, 'category'),
 	],
 };

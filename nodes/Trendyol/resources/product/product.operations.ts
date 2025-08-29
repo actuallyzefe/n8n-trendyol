@@ -1,23 +1,16 @@
 import type { IExecuteFunctions } from 'n8n-workflow';
-import {
-	trendyolApiRequest,
-	getTrendyolCredentials,
-	buildSellerEndpoint,
-	buildPaginationParams,
-	validateRequiredParameter,
-} from '../GenericFunctions';
-import type { ProductFilters } from '../types';
+import { trendyolApiRequest, getTrendyolCredentials } from '../../GenericFunctions';
+import { buildPaginationParams, validateRequiredParameter } from '../../utils';
+import { buildProductEndpoint } from '../../endpoints';
+import type { ProductFilters } from '../../types';
 
 /**
  * Get all products
  */
-export async function executeProductGetAll(
-	this: IExecuteFunctions,
-	index: number,
-): Promise<any> {
+export async function getAllProducts(this: IExecuteFunctions, index: number): Promise<any> {
 	const credentials = await getTrendyolCredentials.call(this);
 	const additionalFields = this.getNodeParameter('additionalFields', index) as ProductFilters;
-	
+
 	const qs = buildPaginationParams(additionalFields);
 
 	// Basic status filters
@@ -71,24 +64,19 @@ export async function executeProductGetAll(
 		qs.blacklisted = additionalFields.blacklisted;
 	}
 
-	const endpoint = buildSellerEndpoint(credentials.supplierId, '/products');
-
+	const endpoint = buildProductEndpoint(credentials.supplierId);
 	return await trendyolApiRequest.call(this, 'GET', endpoint, undefined, qs);
 }
 
 /**
  * Get a single product by ID
  */
-export async function executeProductGet(
-	this: IExecuteFunctions,
-	index: number,
-): Promise<any> {
+export async function getProduct(this: IExecuteFunctions, index: number): Promise<any> {
 	const credentials = await getTrendyolCredentials.call(this);
 	const productId = this.getNodeParameter('productId', index) as string;
-	
+
 	validateRequiredParameter(productId, 'productId');
-	
-	const endpoint = buildSellerEndpoint(credentials.supplierId, `/products/${productId}`);
-	
+
+	const endpoint = buildProductEndpoint(credentials.supplierId, productId);
 	return await trendyolApiRequest.call(this, 'GET', endpoint);
 }
