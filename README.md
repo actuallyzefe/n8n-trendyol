@@ -35,15 +35,18 @@ This Trendyol node provides comprehensive integration with the Trendyol Marketpl
 
 ### **Products**
 
-- `Get All` - Retrieve all products with pagination and filtering options
+- `Get All` - Retrieve all products with comprehensive filtering options:
+  - **Basic Filters**: Approved status, archived status, pagination
+  - **Brand & Category**: Filter by specific brand IDs (comma-separated array)
+  - **Product Identification**: Barcode and stock code filtering
+  - **Date Range**: Filter by creation or modification date (timestamp support)
+  - **Status Filters**: On sale, rejected, blacklisted products
+  - **Supplier Filters**: Filter by supplier ID and product main ID
 - `Get` - Retrieve specific product details by ID
-- `Create` - Create new products with full product configuration
-- `Update` - Modify existing product information
-- `Update Price and Stock` - Update product pricing and inventory levels
 
 ### **Orders**
 
-- `Get All` - Retrieve order information with comprehensive filtering (date ranges, status, etc.)
+- `Get All` - Retrieve order information with filtering (date ranges, pagination)
 - `Get` - Fetch specific order details by order ID
 
 ### **Brands**
@@ -91,7 +94,7 @@ The node uses HTTP Basic Authentication with your API Key as username and API Se
 - **Minimum n8n version**: 1.0.0
 - **Node version**: 1.0
 - **Tested with**: n8n 1.x
-- **Node.js**: >=20.15
+- **Node.js**: >=22.16
 
 This node uses the Trendyol Marketplace API and should be compatible with all current Trendyol partner configurations.
 
@@ -104,35 +107,9 @@ This node uses the Trendyol Marketplace API and should be compatible with all cu
 3. Create a new workflow and add the Trendyol node
 4. Configure your desired operation (Product, Order, Brand, or Category management)
 
-### Workflow Examples
-
-#### Example 1: Inventory Sync from External Source
-
-```
-Webhook → Data Processing → Trendyol (Update Price and Stock) → Email Notification
-```
-
-This workflow listens for inventory updates, processes the data, updates product stock and pricing in Trendyol, and sends a confirmation email.
-
-#### Example 2: Order Processing Automation
-
-```
-Schedule Trigger → Trendyol (Get Orders) → Filter (New Orders) → Process Orders → Send Notifications
-```
-
-This workflow runs periodically to fetch new orders from Trendyol and process them through your fulfillment system.
-
-#### Example 3: Product Catalog Sync
-
-```
-Schedule Trigger → External API (Get Products) → Transform Data → Trendyol (Create/Update Products)
-```
-
-This workflow synchronizes your product catalog with Trendyol, creating new products or updating existing ones.
-
 ### Resource Operations
 
-**Product Operations**: Manage your product catalog with full CRUD operations, including specialized price and inventory updates.
+**Product Operations**: Retrieve and filter your product catalog with comprehensive filtering options matching official Trendyol API specifications.
 
 **Order Operations**: Access order information with comprehensive filtering by date ranges, status, and other criteria.
 
@@ -144,7 +121,13 @@ This workflow synchronizes your product catalog with Trendyol, creating new prod
 
 **Pagination**: Use page and size parameters for large datasets to efficiently manage API calls and response sizes.
 
-**Filtering**: Apply various filters like approval status, archive status, and date ranges to get precisely the data you need.
+**Advanced Product Filtering**: Apply comprehensive filters following official Trendyol API specification:
+
+- **Status Filters**: approved, archived, onSale, rejected, blacklisted
+- **Identification**: barcode, stockCode, productMainId, supplierId
+- **Date Filtering**: startDate, endDate with dateQueryType (CREATED_DATE/LAST_MODIFIED_DATE)
+- **Brand Filtering**: brandIds (supports multiple brands as comma-separated array)
+- **Pagination**: page and size parameters for efficient data retrieval
 
 **Error Handling**: The node includes comprehensive error handling with detailed error messages for troubleshooting.
 
@@ -183,7 +166,7 @@ Found a bug or have a feature request? Please check existing issues first, then 
 
 ### Prerequisites
 
-- Node.js >=20.15
+- Node.js >=22.16
 - n8n (for testing)
 - Trendyol Partner Account with API access
 
@@ -218,15 +201,30 @@ Found a bug or have a feature request? Please check existing issues first, then 
 ### Project Structure
 
 ```
-├── credentials/           # Authentication credential definitions
+├── credentials/                 # Authentication credential definitions
 │   └── TrendyolApi.credentials.ts
 ├── nodes/
 │   └── Trendyol/
-│       ├── Trendyol.node.ts    # Main node implementation
-│       └── trendyol.svg        # Node icon
-├── gulpfile.js          # Build configuration
-├── package.json         # Project configuration
-└── tsconfig.json        # TypeScript configuration
+│       ├── Trendyol.node.ts        # Main node orchestrator
+│       ├── GenericFunctions.ts     # Shared utility functions
+│       ├── types/                  # TypeScript type definitions
+│       │   └── index.ts
+│       ├── operations/             # Resource operation implementations
+│       │   ├── index.ts
+│       │   ├── product.operations.ts
+│       │   ├── order.operations.ts
+│       │   ├── brand.operations.ts
+│       │   └── category.operations.ts
+│       ├── node-definition/        # Node UI property definitions
+│       │   ├── index.ts
+│       │   ├── resources.ts
+│       │   ├── operations.ts
+│       │   └── fields.ts
+│       └── trendyol.svg           # Node icon
+├── dist/                       # Compiled output
+├── gulpfile.js                 # Build configuration
+├── package.json               # Project configuration
+└── tsconfig.json              # TypeScript configuration
 ```
 
 ### Testing Your Changes
@@ -243,6 +241,7 @@ Found a bug or have a feature request? Please check existing issues first, then 
 - [Trendyol Developer Documentation](https://developers.trendyol.com/)
 - [Trendyol API Authorization Guide](https://developers.trendyol.com/docs/authorization)
 - [Trendyol Product Integration API](https://developers.trendyol.com/docs/marketplace/urun-entegrasyonu/api-endpointleri)
+- [Trendyol Product Filtering Documentation](https://developers.trendyol.com/docs/marketplace/urun-entegrasyonu/urun-filtreleme)
 
 ## License
 

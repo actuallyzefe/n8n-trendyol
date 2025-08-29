@@ -1,7 +1,9 @@
-import {
-	IAuthenticateGeneric,
+import { BINARY_ENCODING } from 'n8n-workflow';
+import type {
+	ICredentialDataDecryptedObject,
 	ICredentialTestRequest,
 	ICredentialType,
+	IHttpRequestOptions,
 	INodeProperties,
 } from 'n8n-workflow';
 
@@ -56,21 +58,23 @@ export class TrendyolApi implements ICredentialType {
 		},
 	];
 
-	authenticate: IAuthenticateGeneric = {
-		type: 'generic',
-		properties: {
-			auth: {
-				username: '={{ $credentials.apiKey }}',
-				password: '={{ $credentials.apiSecret }}',
-			},
-		},
-	};
+
+	async authenticate(
+		credentials: ICredentialDataDecryptedObject,
+		requestOptions: IHttpRequestOptions,
+	): Promise<IHttpRequestOptions> {
+		requestOptions.headers = {
+			...requestOptions.headers,
+			Authorization: `Basic ${Buffer.from(`${credentials.apiKey}:${credentials.apiSecret}`).toString(BINARY_ENCODING)}`,
+		};      
+		return requestOptions;
+	}
+
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL:
-				'={{ $credentials.environment === "sandbox" ? "https://stageapi.trendyol.com" : "https://api.trendyol.com" }}',
-			url: '/sapigw/suppliers/={{ $credentials.supplierId }}/addresses',
+			baseURL: '={{$credentials.environment === "sandbox" ? "https://stageapigw.trendyol.com" : "https://apigw.trendyol.com"}}',
+			url: '/integration/product/brands',
 			method: 'GET',
 		},
 	};
