@@ -3,6 +3,8 @@ import { productGetManyFields } from './fields/product';
 import { orderGetManyFields } from './fields/order';
 import { brandNameField, brandGetManyFields } from './fields/brand';
 import { categoryGetManyFields } from './fields/category';
+import { questionGetManyFields, questionAnswerFields } from './fields/question';
+import { getManyWebhooksFields } from './fields/webhook';
 
 /**
  * Export individual required field components for specific operations
@@ -70,5 +72,27 @@ export const additionalFieldsCollection: INodeProperties = {
 
 		// Category-specific fields (filters for category getMany operation)
 		...addResourceDisplayOptions(categoryGetManyFields, 'category'),
+
+		// Question-specific fields (filters for question getMany operation)
+		...addResourceDisplayOptions(questionGetManyFields, 'question'),
+
+		// Webhook-specific fields (filters for webhook getMany operation)
+		...addResourceDisplayOptions(getManyWebhooksFields, 'webhook'),
 	],
 };
+
+/**
+ * Question answer fields collection
+ * Fields specifically for answering customer questions
+ */
+export const questionAnswerFieldsCollection: INodeProperties[] = questionAnswerFields.map(
+	(field) => ({
+		...field,
+		displayOptions: {
+			show: {
+				resource: ['question'],
+				operation: ['answer'],
+			},
+		},
+	}),
+);

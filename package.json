@@ -38,7 +38,8 @@
 			"dist/credentials/TrendyolApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/Trendyol/Trendyol.node.js"
+			"dist/nodes/Trendyol/Trendyol.node.js",
+			"dist/nodes/Trendyol/TrendyolTrigger.node.js"
 		]
 	},
 	"devDependencies": {

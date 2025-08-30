@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-trendyol.trendyolTrigger",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["E-commerce"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://developers.trendyol.com/docs/category/webhook"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://developers.trendyol.com/docs/category/webhook"
+			}
+		]
+	}
+}

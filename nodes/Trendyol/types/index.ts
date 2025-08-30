@@ -60,6 +60,20 @@ export interface TrendyolCategory {
 	[key: string]: any;
 }
 
+export interface TrendyolQuestion {
+	id?: string;
+	customerId?: string;
+	customerName?: string;
+	questionText?: string;
+	answerText?: string;
+	productId?: string;
+	productName?: string;
+	creationDate?: number;
+	answerDate?: number;
+	status?: 'WAITING_FOR_ANSWER' | 'WAITING_FOR_APPROVE' | 'ANSWERED' | 'REPORTED' | 'REJECTED';
+	[key: string]: any;
+}
+
 export interface PaginationParams {
 	page?: number;
 	size?: number;
@@ -92,15 +106,77 @@ export interface OrderFilters extends PaginationParams {
 	shipmentPackageIds?: number;
 }
 
-export type TrendyolResource = 'product' | 'order' | 'brand' | 'category';
+export interface QuestionFilters extends PaginationParams {
+	startDate?: string;
+	endDate?: string;
+	status?: 'WAITING_FOR_ANSWER' | 'WAITING_FOR_APPROVE' | 'ANSWERED' | 'REPORTED' | 'REJECTED';
+	barcode?: string;
+	supplierId?: number;
+	orderByField?: 'LastModifiedDate' | 'CreatedDate';
+	orderByDirection?: 'ASC' | 'DESC';
+}
+
+export type TrendyolResource = 'product' | 'order' | 'brand' | 'category' | 'question' | 'webhook';
 
 export type ProductOperation = 'getMany' | 'get';
 export type OrderOperation = 'getMany' | 'get';
 export type BrandOperation = 'getMany' | 'getByName';
 export type CategoryOperation = 'getMany';
+export type QuestionOperation = 'getMany' | 'answer';
+export type WebhookOperation = 'getMany';
 
 export type TrendyolOperation =
 	| ProductOperation
 	| OrderOperation
 	| BrandOperation
-	| CategoryOperation;
+	| CategoryOperation
+	| QuestionOperation
+	| WebhookOperation;
+
+// Webhook Types
+export interface TrendyolWebhook {
+	id?: string;
+	url: string;
+	username?: string;
+	password?: string;
+	authenticationType?: 'BASIC_AUTHENTICATION' | 'API_KEY';
+	apiKey?: string;
+	subscribedStatuses?: TrendyolWebhookEventType[];
+	eventType?: TrendyolWebhookEventType; // Legacy field for backward compatibility
+	isActive?: boolean;
+	supplierId?: string;
+	createdDate?: number;
+	lastModifiedDate?: number;
+}
+
+export interface TrendyolWebhookEvent {
+	id?: string;
+	eventType: TrendyolWebhookEventType;
+	eventDate?: number;
+	supplierId?: string;
+	data?: any;
+	webhookId?: string;
+}
+
+export interface TrendyolWebhookResponse {
+	webhooks?: TrendyolWebhook[];
+	totalElements?: number;
+	totalPages?: number;
+	page?: number;
+	size?: number;
+}
+
+export type TrendyolWebhookEventType =
+	| 'CREATED'
+	| 'PICKING'
+	| 'INVOICED'
+	| 'SHIPPED'
+	| 'CANCELLED'
+	| 'DELIVERED'
+	| 'UNDELIVERED'
+	| 'RETURNED'
+	| 'UNSUPPLIED'
+	| 'AWAITING'
+	| 'UNPACKED'
+	| 'AT_COLLECTION_POINT'
+	| 'VERIFIED';

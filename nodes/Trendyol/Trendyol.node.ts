@@ -13,6 +13,9 @@ import {
 	getManyBrands,
 	getBrandByName,
 	getManyCategories,
+	getManyQuestions,
+	answerQuestion,
+	getManyWebhooks,
 } from './resources';
 import type { TrendyolResource, TrendyolOperation } from './types';
 
@@ -75,6 +78,16 @@ export class Trendyol implements INodeType {
 				} else if (resource === 'category') {
 					if (operation === 'getMany') {
 						responseData = await getManyCategories.call(this, i);
+					}
+				} else if (resource === 'question') {
+					if (operation === 'getMany') {
+						responseData = await getManyQuestions.call(this, i);
+					} else if (operation === 'answer') {
+						responseData = await answerQuestion.call(this, i);
+					}
+				} else if (resource === 'webhook') {
+					if (operation === 'getMany') {
+						responseData = await getManyWebhooks.call(this, i);
 					}
 				}
 

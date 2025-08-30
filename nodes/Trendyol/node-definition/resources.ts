@@ -22,6 +22,14 @@ export const resourceField: INodeProperties = {
 			name: 'Category',
 			value: 'category',
 		},
+		{
+			name: 'Question',
+			value: 'question',
+		},
+		{
+			name: 'Webhook',
+			value: 'webhook',
+		},
 	],
 	default: 'product',
 };
