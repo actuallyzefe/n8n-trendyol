@@ -130,10 +130,7 @@ export class TrendyolTrigger implements INodeType {
 	webhookMethods = {
 		default: {
 			async checkExists(this: IHookFunctions): Promise<boolean> {
-				const originalUrl = this.getNodeWebhookUrl('default');
-				const webhookUrl = `https://064c3fcb1541.ngrok-free.app${
-					originalUrl?.replace(/^https?:\/\/[^\/]+/, '') || '/webhook'
-				}`;
+				const webhookUrl = this.getNodeWebhookUrl('default');
 				const eventType = this.getNodeParameter('event') as TrendyolWebhookEventType;
 
 				try {
@@ -149,10 +146,7 @@ export class TrendyolTrigger implements INodeType {
 			},
 
 			async create(this: IHookFunctions): Promise<boolean> {
-				const originalUrl = this.getNodeWebhookUrl('default');
-				const webhookUrl = `https://064c3fcb1541.ngrok-free.app${
-					originalUrl?.replace(/^https?:\/\/[^\/]+/, '') || '/webhook'
-				}`;
+				const webhookUrl = this.getNodeWebhookUrl('default');
 				const eventType = this.getNodeParameter('event') as TrendyolWebhookEventType;
 				const credentials = await this.getCredentials('trendyolApi');
 
