@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-trendyol",
-	"version": "0.1.1",
+	"version": "0.1.4",
 	"description": "Trendyol node for n8n",
 	"keywords": [
 		"n8n-community-node-package",
@@ -38,7 +38,8 @@
 			"dist/credentials/TrendyolApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/Trendyol/Trendyol.node.js"
+			"dist/nodes/Trendyol/Trendyol.node.js",
+			"dist/nodes/Trendyol/TrendyolTrigger.node.js"
 		]
 	},
 	"devDependencies": {
@@ -52,5 +53,8 @@
 	},
 	"peerDependencies": {
 		"n8n-workflow": "*"
+	},
+	"dependencies": {
+		"dayjs": "^1.11.18"
 	}
 }

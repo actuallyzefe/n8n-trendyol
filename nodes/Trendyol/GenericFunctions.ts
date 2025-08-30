@@ -39,6 +39,8 @@ export async function trendyolApiRequest(
 		options.qs = qs;
 	}
 
+	this.logger.info(JSON.stringify(options, null, 2), { tag: 'TrendyolApiRequest' });
+
 	try {
 		const response = await this.helpers.requestWithAuthentication.call(
 			this,

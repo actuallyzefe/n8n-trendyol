@@ -5,8 +5,15 @@ import {
 	orderOperationsField,
 	brandOperationsField,
 	categoryOperationsField,
+	questionOperationsField,
+	webhookOperationsField,
 } from './operations';
-import { brandNameField, additionalFieldsCollection } from './fields';
+import {
+	brandNameField,
+	additionalFieldsCollection,
+	questionAnswerFieldsCollection,
+	webhookDeleteFieldsCollection,
+} from './fields';
 
 export const nodeProperties: INodeProperties[] = [
 	resourceField,
@@ -14,6 +21,10 @@ export const nodeProperties: INodeProperties[] = [
 	orderOperationsField,
 	brandOperationsField,
 	categoryOperationsField,
+	questionOperationsField,
+	webhookOperationsField,
 	brandNameField,
+	...questionAnswerFieldsCollection,
+	...webhookDeleteFieldsCollection,
 	additionalFieldsCollection,
 ];

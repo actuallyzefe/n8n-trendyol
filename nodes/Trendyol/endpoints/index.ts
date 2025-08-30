@@ -11,3 +11,9 @@ export * from './order.endpoints';
 
 // Seller endpoints
 export * from './seller.endpoints';
+
+// Webhook endpoints
+export * from './webhook.endpoints';
+
+// Question endpoints
+export * from './question.endpoints';

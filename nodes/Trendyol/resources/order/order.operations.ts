@@ -1,6 +1,6 @@
 import type { IExecuteFunctions } from 'n8n-workflow';
 import { trendyolApiRequest, getTrendyolCredentials } from '../../GenericFunctions';
-import { buildPaginationParams, dateToTimestamp } from '../../utils';
+import { buildPaginationParams, dateTimeToGMT3Timestamp } from '../../utils';
 import { buildOrderEndpoint } from '../../endpoints';
 import type { OrderFilters } from '../../types';
 
@@ -13,12 +13,12 @@ export async function getManyOrders(this: IExecuteFunctions, index: number): Pro
 
 	const qs = buildPaginationParams(additionalFields);
 
-	// Date filters (convert to timestamp as required by API)
+	// Date filters (convert to GMT+3 timestamp as required by API)
 	if (additionalFields.startDate) {
-		qs.startDate = dateToTimestamp(additionalFields.startDate);
+		qs.startDate = dateTimeToGMT3Timestamp(additionalFields.startDate);
 	}
 	if (additionalFields.endDate) {
-		qs.endDate = dateToTimestamp(additionalFields.endDate);
+		qs.endDate = dateTimeToGMT3Timestamp(additionalFields.endDate);
 	}
 
 	// Status filter
