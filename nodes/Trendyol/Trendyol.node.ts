@@ -16,6 +16,7 @@ import {
 	getManyQuestions,
 	answerQuestion,
 	getManyWebhooks,
+	deleteWebhook,
 } from './resources';
 import type { TrendyolResource, TrendyolOperation } from './types';
 
@@ -88,6 +89,8 @@ export class Trendyol implements INodeType {
 				} else if (resource === 'webhook') {
 					if (operation === 'getMany') {
 						responseData = await getManyWebhooks.call(this, i);
+					} else if (operation === 'delete') {
+						responseData = await deleteWebhook.call(this, i);
 					}
 				}
 

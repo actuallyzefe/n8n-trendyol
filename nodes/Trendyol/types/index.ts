@@ -123,7 +123,7 @@ export type OrderOperation = 'getMany' | 'get';
 export type BrandOperation = 'getMany' | 'getByName';
 export type CategoryOperation = 'getMany';
 export type QuestionOperation = 'getMany' | 'answer';
-export type WebhookOperation = 'getMany';
+export type WebhookOperation = 'getMany' | 'delete';
 
 export type TrendyolOperation =
 	| ProductOperation

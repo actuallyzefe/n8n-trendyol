@@ -12,6 +12,7 @@ import {
 	brandNameField,
 	additionalFieldsCollection,
 	questionAnswerFieldsCollection,
+	webhookDeleteFieldsCollection,
 } from './fields';
 
 export const nodeProperties: INodeProperties[] = [
@@ -24,5 +25,6 @@ export const nodeProperties: INodeProperties[] = [
 	webhookOperationsField,
 	brandNameField,
 	...questionAnswerFieldsCollection,
+	...webhookDeleteFieldsCollection,
 	additionalFieldsCollection,
 ];

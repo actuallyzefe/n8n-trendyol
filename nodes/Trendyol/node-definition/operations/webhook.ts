@@ -17,6 +17,12 @@ export const webhookOperationsField: INodeProperties = {
 			description: 'Get all webhooks',
 			action: 'Get all webhooks',
 		},
+		{
+			name: 'Delete',
+			value: 'delete',
+			description: 'Delete a webhook',
+			action: 'Delete a webhook',
+		},
 	],
 	default: 'getMany',
 };

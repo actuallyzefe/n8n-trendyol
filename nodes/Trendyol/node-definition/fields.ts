@@ -4,7 +4,7 @@ import { orderGetManyFields } from './fields/order';
 import { brandNameField, brandGetManyFields } from './fields/brand';
 import { categoryGetManyFields } from './fields/category';
 import { questionGetManyFields, questionAnswerFields } from './fields/question';
-import { getManyWebhooksFields } from './fields/webhook';
+import { getManyWebhooksFields, deleteWebhookFields } from './fields/webhook';
 
 /**
  * Export individual required field components for specific operations
@@ -92,6 +92,22 @@ export const questionAnswerFieldsCollection: INodeProperties[] = questionAnswerF
 			show: {
 				resource: ['question'],
 				operation: ['answer'],
+			},
+		},
+	}),
+);
+
+/**
+ * Webhook delete fields collection
+ * Fields specifically for deleting webhooks
+ */
+export const webhookDeleteFieldsCollection: INodeProperties[] = deleteWebhookFields.map(
+	(field) => ({
+		...field,
+		displayOptions: {
+			show: {
+				resource: ['webhook'],
+				operation: ['delete'],
 			},
 		},
 	}),
