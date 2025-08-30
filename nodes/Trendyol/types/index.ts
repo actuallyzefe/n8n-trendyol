@@ -85,8 +85,8 @@ export interface ProductFilters extends PaginationParams {
 	brandIds?: string;
 	barcode?: string;
 	stockCode?: string;
-	startDate?: number;
-	endDate?: number;
+	startDate?: string;
+	endDate?: string;
 	dateQueryType?: string;
 	supplierId?: number;
 	productMainId?: string;

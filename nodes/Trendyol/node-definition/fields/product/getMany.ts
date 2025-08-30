@@ -41,16 +41,18 @@ export const productGetManyFields: INodeProperties[] = [
 	{
 		displayName: 'Start Date',
 		name: 'startDate',
-		type: 'number',
+		type: 'dateTime',
 		default: '',
-		description: 'Gets products after a specific date. Must be sent as timestamp.',
+		description:
+			'Gets products after a specific date (Timestamp GMT - for createdDate/lastModifiedDate)',
 	},
 	{
 		displayName: 'End Date',
 		name: 'endDate',
-		type: 'number',
+		type: 'dateTime',
 		default: '',
-		description: 'Gets products before a specific date. Must be sent as timestamp.',
+		description:
+			'Gets products before a specific date (Timestamp GMT - for createdDate/lastModifiedDate)',
 	},
 	{
 		displayName: 'Date Query Type',

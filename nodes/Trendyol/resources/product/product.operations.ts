@@ -1,6 +1,6 @@
 import type { IExecuteFunctions } from 'n8n-workflow';
 import { trendyolApiRequest, getTrendyolCredentials } from '../../GenericFunctions';
-import { buildPaginationParams } from '../../utils';
+import { buildPaginationParams, dateTimeToGMTTimestamp } from '../../utils';
 import { buildProductEndpoint } from '../../endpoints';
 import type { ProductFilters } from '../../types';
 
@@ -34,12 +34,12 @@ export async function getManyProducts(this: IExecuteFunctions, index: number): P
 		qs.stockCode = additionalFields.stockCode;
 	}
 
-	// Date range filters (already timestamps from UI)
+	// Date range filters (convert to GMT timestamp for createdDate/lastModifiedDate fields)
 	if (additionalFields.startDate) {
-		qs.startDate = additionalFields.startDate;
+		qs.startDate = dateTimeToGMTTimestamp(additionalFields.startDate);
 	}
 	if (additionalFields.endDate) {
-		qs.endDate = additionalFields.endDate;
+		qs.endDate = dateTimeToGMTTimestamp(additionalFields.endDate);
 	}
 	if (additionalFields.dateQueryType) {
 		qs.dateQueryType = additionalFields.dateQueryType;

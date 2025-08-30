@@ -1,6 +1,6 @@
 import type { IExecuteFunctions } from 'n8n-workflow';
 import { trendyolApiRequest, getTrendyolCredentials } from '../../GenericFunctions';
-import { buildPaginationParams, dateToTimestamp } from '../../utils';
+import { buildPaginationParams, dateTimeToGMTTimestamp } from '../../utils';
 import { buildQuestionEndpoint, buildQuestionAnswerEndpoint } from '../../endpoints';
 import type { QuestionFilters } from '../../types';
 
@@ -16,12 +16,12 @@ export async function getManyQuestions(this: IExecuteFunctions, index: number): 
 	// Required supplierId parameter - use from additionalFields or fall back to credentials
 	qs.supplierId = additionalFields.supplierId || parseInt(credentials.supplierId, 10);
 
-	// Date filters (convert to timestamp as required by API)
+	// Date filters (convert to GMT timestamp for createdDate fields)
 	if (additionalFields.startDate) {
-		qs.startDate = dateToTimestamp(additionalFields.startDate);
+		qs.startDate = dateTimeToGMTTimestamp(additionalFields.startDate);
 	}
 	if (additionalFields.endDate) {
-		qs.endDate = dateToTimestamp(additionalFields.endDate);
+		qs.endDate = dateTimeToGMTTimestamp(additionalFields.endDate);
 	}
 
 	// Status filter

@@ -147,6 +147,7 @@ export class TrendyolTrigger implements INodeType {
 					return false;
 				}
 			},
+
 			async create(this: IHookFunctions): Promise<boolean> {
 				const originalUrl = this.getNodeWebhookUrl('default');
 				const webhookUrl = `https://064c3fcb1541.ngrok-free.app${
@@ -184,17 +185,14 @@ export class TrendyolTrigger implements INodeType {
 						json: true,
 					};
 
-					console.log('Creating webhook with options:', options);
+					this.logger.info(JSON.stringify(options, null, 2), { tag: 'WebhookCreationOptions' });
 
 					const response = await this.helpers.requestWithAuthentication.call(
 						this,
 						'trendyolApi',
 						options,
 					);
-
-					console.log('Webhook creation response:', response);
-					console.log('Response type:', typeof response);
-					console.log('Response keys:', response ? Object.keys(response) : 'No response object');
+					this.logger.info(JSON.stringify(response, null, 2), { tag: 'WebhookCreationResponse' });
 
 					// Check for different response formats
 					let webhookId = null;
@@ -212,33 +210,36 @@ export class TrendyolTrigger implements INodeType {
 						) {
 							// Generate a fallback ID for tracking
 							webhookId = `webhook_${Date.now()}`;
-							console.log('No explicit ID in response, using fallback ID:', webhookId);
+							this.logger.info(JSON.stringify(webhookId, null, 2), { tag: 'WebhookFallbackId' });
 						}
 					}
 
 					if (webhookId) {
 						const webhookData = this.getWorkflowStaticData('node');
 						webhookData.webhookId = webhookId;
-						console.log('Webhook created successfully with ID:', webhookId);
+						this.logger.info(JSON.stringify(webhookId, null, 2), { tag: 'WebhookCreatedId' });
 						return true;
 					}
 
-					console.log('Webhook creation failed - no ID in response:', response);
+					this.logger.info(JSON.stringify(response, null, 2), { tag: 'WebhookCreationFailed' });
 
 					// As a fallback, if we got here without an error, assume success
 					// This handles cases where Trendyol creates the webhook but doesn't return an ID
-					console.log('Assuming webhook creation succeeded despite no ID in response');
+					this.logger.info('Assuming webhook creation succeeded despite no ID in response', {
+						tag: 'WebhookCreationFallback',
+					});
 					const webhookData = this.getWorkflowStaticData('node');
 					webhookData.webhookId = `fallback_${Date.now()}`;
 					return true;
 				} catch (error) {
-					console.error('Webhook creation error:', error);
+					this.logger.error(JSON.stringify(error, null, 2), { tag: 'WebhookCreationError' });
 					throw new NodeOperationError(
 						this.getNode(),
 						`Failed to create webhook: ${error.message || error}`,
 					);
 				}
 			},
+
 			async delete(this: IHookFunctions): Promise<boolean> {
 				const webhookData = this.getWorkflowStaticData('node');
 				const credentials = await this.getCredentials('trendyolApi');
@@ -264,7 +265,7 @@ export class TrendyolTrigger implements INodeType {
 						delete webhookData.webhookId;
 						return true;
 					} catch (error) {
-						console.error('Error deleting webhook:', error.message);
+						this.logger.error(JSON.stringify(error, null, 2), { tag: 'WebhookDeletionError' });
 						return false;
 					}
 				}
@@ -278,9 +279,7 @@ export class TrendyolTrigger implements INodeType {
 		const eventType = this.getNodeParameter('event') as string;
 		const simplify = this.getNodeParameter('simplify', false) as boolean;
 
-		console.log('Webhook received data:', bodyData);
-		console.log('Event type:', eventType);
-		console.log('Simplify:', simplify);
+		this.logger.info(JSON.stringify(bodyData, null, 2), { tag: 'WebhookReceivedData' });
 
 		// Ensure we have valid body data
 		let responseData: IDataObject = {};
@@ -301,7 +300,7 @@ export class TrendyolTrigger implements INodeType {
 		responseData.eventType = eventType;
 		responseData.receivedAt = new Date().toISOString();
 
-		console.log('Final response data:', responseData);
+		this.logger.info(JSON.stringify(responseData, null, 2), { tag: 'FinalResponseData' });
 
 		return {
 			workflowData: [

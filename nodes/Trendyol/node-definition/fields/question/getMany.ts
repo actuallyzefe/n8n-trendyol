@@ -8,14 +8,14 @@ export const questionGetManyFields: INodeProperties[] = [
 		name: 'startDate',
 		type: 'dateTime',
 		default: '',
-		description: 'Start date for filtering questions (Timestamp GMT+3)',
+		description: 'Start date for filtering questions (Timestamp GMT - for createdDate)',
 	},
 	{
 		displayName: 'End Date',
 		name: 'endDate',
 		type: 'dateTime',
 		default: '',
-		description: 'End date for filtering questions (Timestamp GMT+3)',
+		description: 'End date for filtering questions (Timestamp GMT - for createdDate)',
 	},
 	{
 		displayName: 'Status',

@@ -53,5 +53,8 @@
 	},
 	"peerDependencies": {
 		"n8n-workflow": "*"
+	},
+	"dependencies": {
+		"dayjs": "^1.11.18"
 	}
 }
