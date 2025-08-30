@@ -7,20 +7,20 @@ export const resourceField: INodeProperties = {
 	noDataExpression: true,
 	options: [
 		{
-			name: 'Product',
-			value: 'product',
-		},
-		{
-			name: 'Order',
-			value: 'order',
-		},
-		{
 			name: 'Brand',
 			value: 'brand',
 		},
 		{
 			name: 'Category',
 			value: 'category',
+		},
+		{
+			name: 'Order',
+			value: 'order',
+		},
+		{
+			name: 'Product',
+			value: 'product',
 		},
 		{
 			name: 'Question',

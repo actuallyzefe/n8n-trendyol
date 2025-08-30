@@ -25,24 +25,24 @@ export const questionGetManyFields: INodeProperties[] = [
 		description: 'Filter questions by status',
 		options: [
 			{
-				name: 'Waiting for Answer',
-				value: 'WAITING_FOR_ANSWER',
-			},
-			{
-				name: 'Waiting for Approve',
-				value: 'WAITING_FOR_APPROVE',
-			},
-			{
 				name: 'Answered',
 				value: 'ANSWERED',
+			},
+			{
+				name: 'Rejected',
+				value: 'REJECTED',
 			},
 			{
 				name: 'Reported',
 				value: 'REPORTED',
 			},
 			{
-				name: 'Rejected',
-				value: 'REJECTED',
+				name: 'Waiting for Answer',
+				value: 'WAITING_FOR_ANSWER',
+			},
+			{
+				name: 'Waiting for Approve',
+				value: 'WAITING_FOR_APPROVE',
 			},
 		],
 	},

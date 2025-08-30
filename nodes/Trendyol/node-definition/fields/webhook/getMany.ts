@@ -19,7 +19,7 @@ export const getManyWebhooksFields: INodeProperties[] = [
 				name: 'returnAll',
 				type: 'boolean',
 				default: false,
-				description: 'Whether to return all results or only up to the limit',
+				description: 'Whether to return all results or only up to a given limit',
 			},
 			{
 				displayName: 'Limit',
@@ -32,7 +32,6 @@ export const getManyWebhooksFields: INodeProperties[] = [
 				},
 				typeOptions: {
 					minValue: 1,
-					maxValue: 500,
 				},
 				default: 50,
 				description: 'Max number of results to return',

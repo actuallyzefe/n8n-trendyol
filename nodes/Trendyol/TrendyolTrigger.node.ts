@@ -48,49 +48,9 @@ export class TrendyolTrigger implements INodeType {
 				type: 'options',
 				options: [
 					{
-						name: 'Order Created',
-						value: 'CREATED',
-						description: 'Triggers when a new order is created',
-					},
-					{
-						name: 'Order Picking',
-						value: 'PICKING',
-						description: 'Triggers when order picking starts',
-					},
-					{
-						name: 'Order Invoiced',
-						value: 'INVOICED',
-						description: 'Triggers when an order is invoiced',
-					},
-					{
-						name: 'Order Shipped',
-						value: 'SHIPPED',
-						description: 'Triggers when an order is shipped',
-					},
-					{
-						name: 'Order Cancelled',
-						value: 'CANCELLED',
-						description: 'Triggers when an order is cancelled',
-					},
-					{
-						name: 'Order Delivered',
-						value: 'DELIVERED',
-						description: 'Triggers when an order is delivered',
-					},
-					{
-						name: 'Order Undelivered',
-						value: 'UNDELIVERED',
-						description: 'Triggers when an order is undelivered',
-					},
-					{
-						name: 'Order Returned',
-						value: 'RETURNED',
-						description: 'Triggers when an order is returned',
-					},
-					{
-						name: 'Order Unsupplied',
-						value: 'UNSUPPLIED',
-						description: 'Triggers when an order is unsupplied',
+						name: 'Order At Collection Point',
+						value: 'AT_COLLECTION_POINT',
+						description: 'Triggers when an order reaches collection point',
 					},
 					{
 						name: 'Order Awaiting',
@@ -98,14 +58,54 @@ export class TrendyolTrigger implements INodeType {
 						description: 'Triggers when an order is awaiting',
 					},
 					{
+						name: 'Order Cancelled',
+						value: 'CANCELLED',
+						description: 'Triggers when an order is cancelled',
+					},
+					{
+						name: 'Order Created',
+						value: 'CREATED',
+						description: 'Triggers when a new order is created',
+					},
+					{
+						name: 'Order Delivered',
+						value: 'DELIVERED',
+						description: 'Triggers when an order is delivered',
+					},
+					{
+						name: 'Order Invoiced',
+						value: 'INVOICED',
+						description: 'Triggers when an order is invoiced',
+					},
+					{
+						name: 'Order Picking',
+						value: 'PICKING',
+						description: 'Triggers when order picking starts',
+					},
+					{
+						name: 'Order Returned',
+						value: 'RETURNED',
+						description: 'Triggers when an order is returned',
+					},
+					{
+						name: 'Order Shipped',
+						value: 'SHIPPED',
+						description: 'Triggers when an order is shipped',
+					},
+					{
+						name: 'Order Undelivered',
+						value: 'UNDELIVERED',
+						description: 'Triggers when an order is undelivered',
+					},
+					{
 						name: 'Order Unpacked',
 						value: 'UNPACKED',
 						description: 'Triggers when an order is unpacked',
 					},
 					{
-						name: 'Order At Collection Point',
-						value: 'AT_COLLECTION_POINT',
-						description: 'Triggers when an order reaches collection point',
+						name: 'Order Unsupplied',
+						value: 'UNSUPPLIED',
+						description: 'Triggers when an order is unsupplied',
 					},
 					{
 						name: 'Order Verified',
