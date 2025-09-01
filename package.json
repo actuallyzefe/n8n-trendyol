@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-trendyol",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"description": "Trendyol node for n8n",
 	"keywords": [
 		"n8n-community-node-package",
