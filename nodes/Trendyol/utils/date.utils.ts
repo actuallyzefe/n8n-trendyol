@@ -1,37 +1,67 @@
 /**
  * Date Utilities
- * Helper functions for handling date conversions using dayjs
+ * Helper functions for handling date conversions using native JavaScript Date
  */
 
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
+/**
+ * Check if a date string is valid
+ */
+function isValidDate(dateString: string): boolean {
+	const date = new Date(dateString);
+	return !isNaN(date.getTime());
+}
 
-// Extend dayjs with plugins
-dayjs.extend(utc);
-dayjs.extend(timezone);
+/**
+ * Convert a date string to GMT+3 timestamp
+ * Handles various date formats and timezone specifications
+ */
+function convertToGMT3(dateString: string): number {
+	// Remove any trailing 'Z' or timezone offset for consistent parsing
+	const cleanDateString = dateString.replace(/[Zz]$/, '').replace(/[+-]\d{2}:?\d{2}$/, '');
+
+	// Parse the date string
+	const date = new Date(cleanDateString);
+
+	if (isNaN(date.getTime())) {
+		throw new Error(`Invalid date format: ${dateString}`);
+	}
+
+	// Get the local time components
+	const year = date.getFullYear();
+	const month = date.getMonth();
+	const day = date.getDate();
+	const hours = date.getHours();
+	const minutes = date.getMinutes();
+	const seconds = date.getSeconds();
+	const milliseconds = date.getMilliseconds();
+
+	// Create a new date object representing this time in GMT+3
+	// We'll use the Date constructor with UTC methods to ensure proper timezone handling
+	const gmt3Date = new Date(Date.UTC(year, month, day, hours, minutes, seconds, milliseconds));
+
+	// Adjust for GMT+3 (3 hours ahead of UTC)
+	// Subtract 3 hours from UTC to get the correct GMT+3 timestamp
+	return gmt3Date.getTime() - 3 * 60 * 60 * 1000;
+}
 
 /**
  * Convert date to timestamp for Trendyol API
  * Trendyol API expects timestamps in GMT+3 timezone
  */
 export function dateToTimestamp(date: string): number {
-	// Parse the input date string using dayjs
-	const inputDate = dayjs(date);
-
 	// Check if the date is valid
-	if (!inputDate.isValid()) {
+	if (!isValidDate(date)) {
 		throw new Error(`Invalid date format: ${date}`);
 	}
 
 	// If no timezone is specified, treat as GMT+3
 	if (!/[+-]\d{2}:?\d{2}|Z$/i.test(date)) {
 		// No timezone specified - treat as GMT+3
-		return inputDate.tz('Europe/Istanbul').valueOf();
+		return convertToGMT3(date);
 	}
 
 	// Timezone was specified - convert to GMT+3
-	return inputDate.tz('Europe/Istanbul').valueOf();
+	return convertToGMT3(date);
 }
 
 /**
@@ -43,10 +73,8 @@ export function dateTimeToGMT3Timestamp(dateTime: string): number {
 		throw new Error('Date time is required');
 	}
 
-	// Parse the datetime using dayjs
-	const date = dayjs(dateTime);
-
-	if (!date.isValid()) {
+	// Check if the date is valid
+	if (!isValidDate(dateTime)) {
 		throw new Error(`Invalid date format: ${dateTime}`);
 	}
 
@@ -54,13 +82,9 @@ export function dateTimeToGMT3Timestamp(dateTime: string): number {
 	// We want this to be interpreted as "11:00 AM on August 30th in GMT+3"
 	//
 	// Strategy: Treat the user input as if it's already in GMT+3 timezone
-	// dayjs makes this much simpler and more reliable
+	// Convert the input to GMT+3 timestamp
 
-	// Parse the input as if it's in GMT+3 (Europe/Istanbul timezone)
-	// This will create the correct UTC timestamp for that local time
-	const gmt3Date = dayjs.tz(dateTime, 'Europe/Istanbul');
-
-	return gmt3Date.valueOf();
+	return convertToGMT3(dateTime);
 }
 
 /**
@@ -72,10 +96,8 @@ export function dateTimeToGMTTimestamp(dateTime: string): number {
 		throw new Error('Date time is required');
 	}
 
-	// Parse the datetime using dayjs
-	const date = dayjs(dateTime);
-
-	if (!date.isValid()) {
+	// Check if the date is valid
+	if (!isValidDate(dateTime)) {
 		throw new Error(`Invalid date format: ${dateTime}`);
 	}
 
@@ -83,11 +105,27 @@ export function dateTimeToGMTTimestamp(dateTime: string): number {
 	// We want this to be interpreted as "11:00 AM on August 30th in GMT (UTC)"
 	//
 	// Strategy: Treat the user input as if it's already in GMT timezone
-	// dayjs makes this much simpler and more reliable
+	// Parse the input as UTC timestamp
 
-	// Parse the input as if it's in GMT (UTC timezone)
-	// This will create the correct UTC timestamp for that time
-	const gmtDate = dayjs.utc(dateTime);
+	// Remove any trailing 'Z' or timezone offset for consistent parsing
+	const cleanDateString = dateTime.replace(/[Zz]$/, '').replace(/[+-]\d{2}:?\d{2}$/, '');
 
-	return gmtDate.valueOf();
+	// Parse the date string
+	const date = new Date(cleanDateString);
+
+	if (isNaN(date.getTime())) {
+		throw new Error(`Invalid date format: ${dateTime}`);
+	}
+
+	// Get the local time components
+	const year = date.getFullYear();
+	const month = date.getMonth();
+	const day = date.getDate();
+	const hours = date.getHours();
+	const minutes = date.getMinutes();
+	const seconds = date.getSeconds();
+	const milliseconds = date.getMilliseconds();
+
+	// Create a UTC timestamp for this time
+	return Date.UTC(year, month, day, hours, minutes, seconds, milliseconds);
 }
