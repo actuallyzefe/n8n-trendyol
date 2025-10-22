@@ -7,6 +7,7 @@ import type {
 	IWebhookResponseData,
 	IHttpRequestMethods,
 	IRequestOptions,
+	IHttpRequestOptions,
 } from 'n8n-workflow';
 import { NodeConnectionType, NodeOperationError } from 'n8n-workflow';
 
@@ -181,10 +182,10 @@ export class TrendyolTrigger implements INodeType {
 
 					this.logger.info(JSON.stringify(options, null, 2), { tag: 'WebhookCreationOptions' });
 
-					const response = await this.helpers.requestWithAuthentication.call(
+					const response = await this.helpers.httpRequestWithAuthentication.call(
 						this,
 						'trendyolApi',
-						options,
+						options as IHttpRequestOptions,
 					);
 					this.logger.info(JSON.stringify(response, null, 2), { tag: 'WebhookCreationResponse' });
 
@@ -255,7 +256,11 @@ export class TrendyolTrigger implements INodeType {
 							url: `${baseUrl}${endpoint}`,
 						};
 
-						await this.helpers.requestWithAuthentication.call(this, 'trendyolApi', options);
+						await this.helpers.httpRequestWithAuthentication.call(
+							this,
+							'trendyolApi',
+							options as IHttpRequestOptions,
+						);
 						delete webhookData.webhookId;
 						return true;
 					} catch (error) {
@@ -327,10 +332,10 @@ async function listWebhooks(this: IHookFunctions): Promise<TrendyolWebhook[]> {
 		json: true,
 	};
 
-	const response = (await this.helpers.requestWithAuthentication.call(
+	const response = (await this.helpers.httpRequestWithAuthentication.call(
 		this,
 		'trendyolApi',
-		options,
+		options as IHttpRequestOptions,
 	)) as TrendyolWebhookResponse;
 	return response.webhooks || [];
 }

@@ -1,4 +1,9 @@
-import type { IExecuteFunctions, IHttpRequestMethods, IRequestOptions } from 'n8n-workflow';
+import type {
+	IExecuteFunctions,
+	IHttpRequestMethods,
+	IHttpRequestOptions,
+	IRequestOptions,
+} from 'n8n-workflow';
 import { NodeOperationError } from 'n8n-workflow';
 import type { TrendyolCredentials } from './types';
 
@@ -42,10 +47,10 @@ export async function trendyolApiRequest(
 	this.logger.info(JSON.stringify(options, null, 2), { tag: 'TrendyolApiRequest' });
 
 	try {
-		const response = await this.helpers.requestWithAuthentication.call(
+		const response = await this.helpers.httpRequestWithAuthentication.call(
 			this,
 			'trendyolApi',
-			options,
+			options as IHttpRequestOptions,
 		);
 		return response;
 	} catch (error) {
